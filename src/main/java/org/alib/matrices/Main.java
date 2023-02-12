@@ -1,12 +1,12 @@
-package org.example;
+package org.alib.matrices;
 
 public class Main {
     public static void main(String[] args) {
-        int rowsFirst = 3;
-        int columnsFirst = 3;
+        int rowsFirst = 2;
+        int columnsFirst = 2;
 
-        int rowsSecond = 3;
-        int columnsSecond = 3;
+        int rowsSecond = 2;
+        int columnsSecond = 2;
 
         Matrix firstMatrix = new Matrix(rowsFirst, columnsFirst);
         firstMatrix.setMatrix();
@@ -17,7 +17,10 @@ public class Main {
         secondMatrix.displayMatrix();
 
         MatricesOperations matricesOperations = new MatricesOperations(rowsFirst,columnsFirst);
-        firstMatrix.displayMatrix(matricesOperations.multiplyMatrix(firstMatrix.matrix, 2,5));
+        Matrix.displayMatrix(matricesOperations.findSum(matricesOperations.multiplyMatrix(firstMatrix.matrix,2),
+                matricesOperations.multiplyMatrix(secondMatrix.matrix,5)));
+
+
 
     }
 }

@@ -1,10 +1,10 @@
-package org.example;
+package org.alib.matrices;
 
 import java.util.Scanner;
 class Matrix {
     public int[][] matrix;
-    private final int  rows;
-    private final int columns;
+    private static int  rows;
+    private static int columns;
 
     public Matrix(int rows, int columns) {
         this.rows = rows;
@@ -35,7 +35,7 @@ class Matrix {
     }
 
 
-    public void displayMatrix(int[][] matrix) {
+    public static void displayMatrix(int[][] matrix) {
         System.out.println("Матрица:");
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {

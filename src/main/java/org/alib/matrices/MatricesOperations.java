@@ -1,4 +1,4 @@
-package org.example;
+package org.alib.matrices;
 
 public class MatricesOperations {
     int rows;
@@ -39,15 +39,22 @@ public class MatricesOperations {
     }
 
 
-    public int[][] multiplyMatrix(int[][] matrix, int... nums){
+
+    public int[][] multiplyMatrix(int[][] matrix, int... numbers) {
+        int[][] result = matrix;
+        for (int number : numbers) {
+            result = multiplyByNumber(result, number);
+        }
+        return result;
+    }
+
+    public  int[][] multiplyByNumber(int[][] matrix, int number) {
+        int[][] result = new int[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                for (int k = 0;k<nums.length;k++){
-                    resultMatrix[i][j] = nums[k]*matrix[i][j];
-                }
-
+                result[i][j] = matrix[i][j] * number;
             }
         }
-        return resultMatrix;
+        return result;
     }
 }
