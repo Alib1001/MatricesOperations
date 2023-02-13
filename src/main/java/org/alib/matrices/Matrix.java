@@ -36,10 +36,9 @@ class Matrix {
 
 
     public static void displayMatrix(int[][] matrix) {
-        //TODO переписать фунцию для того, чтобы при разном кол-ве столбцов отображение было верным
         System.out.println("Матрица:");
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
                 System.out.print(matrix[i][j] + " ");
             }
             System.out.println();
