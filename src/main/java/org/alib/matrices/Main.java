@@ -2,11 +2,11 @@ package org.alib.matrices;
 
 public class Main {
     public static void main(String[] args) {
-        int rowsFirst = 2;
-        int columnsFirst = 2;
+        int rowsFirst = 3;
+        int columnsFirst = 1;
 
-        int rowsSecond = 2;
-        int columnsSecond = 2;
+        int rowsSecond = 1;
+        int columnsSecond = 3;
 
         Matrix firstMatrix = new Matrix(rowsFirst, columnsFirst);
         firstMatrix.setMatrix();
@@ -17,10 +17,7 @@ public class Main {
         secondMatrix.displayMatrix();
 
         MatricesOperations matricesOperations = new MatricesOperations(rowsFirst,columnsFirst);
-        Matrix.displayMatrix(matricesOperations.findSum(matricesOperations.multiplyMatrix(firstMatrix.matrix,2),
-                matricesOperations.multiplyMatrix(secondMatrix.matrix,5)));
-
-
+        Matrix.displayMatrix(matricesOperations.multiplyMatrices(firstMatrix.matrix, secondMatrix.matrix));
 
     }
 }
