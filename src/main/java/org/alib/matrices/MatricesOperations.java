@@ -1,4 +1,6 @@
 package org.alib.matrices;
+
+//TODO: удалить конструктор
 public class MatricesOperations {
     int rows;
     int columns;
@@ -79,6 +81,35 @@ public class MatricesOperations {
             }
         }
 
+        return result;
+    }
+
+    public int[][] exponentiateMatrix(int matrix[][],int power){
+        if (columns != rows){
+            throw new IllegalArgumentException("Матрица должна быть квадратной !");
+        }
+
+        int[][] result = new int[rows][columns];
+        for (int i = 0; i < rows; i++) {
+            result[i][i] = 1;
+        }
+
+        int[][] temp = new int[rows][columns];
+        for (int p = 0; p < power; p++) {
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    temp[i][j] = 0;
+                    for (int k = 0; k < rows; k++) {
+                        temp[i][j] += matrix[i][k] * result[k][j];
+                    }
+                }
+            }
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    result[i][j] = temp[i][j];
+                }
+            }
+        }
         return result;
     }
 }
