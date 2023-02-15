@@ -2,9 +2,9 @@ package org.alib.matrices;
 
 public class MatricesOperations {
 
-    public int[][] findSum(int[][] matrix1, int[][] matrix2){
+    //TODO: переписать итеративные алгоритмы
 
-
+    public static int[][] findSum(int[][] matrix1, int[][] matrix2){
         int rows1 = matrix1.length;
         int columns1 = matrix1[0].length;
         int rows2 = matrix2.length;
@@ -25,7 +25,7 @@ public class MatricesOperations {
         return resultMatrix;
     }
 
-    public int[][] findDiff(int[][] matrix1, int[][] matrix2){
+    public static int[][] findDiff(int[][] matrix1, int[][] matrix2){
 
         int rows1 = matrix1.length;
         int columns1 = matrix1[0].length;
@@ -48,7 +48,7 @@ public class MatricesOperations {
         return result;
     }
 
-    public int[][] multiplyByNumbers(int[][] matrix, int... numbers) {
+    public static int[][] multiplyByNumbers(int[][] matrix, int... numbers) {
         int[][] result = matrix;
         for (int number : numbers) {
             result = multiplyByNumber(result, number);
@@ -56,7 +56,7 @@ public class MatricesOperations {
         return result;
     }
 
-    public  int[][] multiplyByNumber(int[][] matrix, int number) {
+    public static int[][] multiplyByNumber(int[][] matrix, int number) {
 
         int rows = matrix.length;
         int columns = matrix[0].length;
@@ -70,7 +70,7 @@ public class MatricesOperations {
         return result;
     }
 
-    public int[][] multiplyMatrices(int[][] matrix1,int[][] matrix2){
+    public static int[][] multiplyMatrices(int[][] matrix1,int[][] matrix2){
 
         int rows1 = matrix1.length;
         int columns1 = matrix1[0].length;
@@ -94,7 +94,7 @@ public class MatricesOperations {
         return result;
     }
 
-    public int[][] exponentiateMatrix(int matrix[][],int power){
+    public static int[][] exponentiateMatrix(int matrix[][],int power){
 
         int rows = matrix.length;
         int columns = matrix[0].length;
