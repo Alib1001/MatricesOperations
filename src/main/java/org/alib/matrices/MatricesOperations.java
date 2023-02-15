@@ -1,25 +1,24 @@
 package org.alib.matrices;
 
-//TODO: удалить конструктор
 public class MatricesOperations {
-    int rows;
-    int columns;
-    public MatricesOperations(int rows, int columns) {
-        this.rows = rows;
-        this.columns = columns;
 
-    }
     public int[][] findSum(int[][] matrix1, int[][] matrix2){
 
-        int[][] resultMatrix = new int[rows][columns];
 
-        if (matrix1.length != rows || matrix2.length != rows || matrix1[0].length != columns ||
-                matrix2[0].length != columns) {
+        int rows1 = matrix1.length;
+        int columns1 = matrix1[0].length;
+        int rows2 = matrix2.length;
+        int columns2 = matrix2[0].length;
+
+        int[][] resultMatrix = new int[rows1][columns2];
+
+        if (matrix1.length != rows2 || matrix2.length != rows1 || matrix1[0].length != columns2 ||
+                matrix2[0].length != columns1) {
             throw new IllegalArgumentException("Размеры матриц должны быть равны !");
         }
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
+        for (int i = 0; i < rows1; i++) {
+            for (int j = 0; j < columns1; j++) {
                 resultMatrix[i][j] = matrix1[i][j] + matrix2[i][j];
             }
         }
@@ -27,15 +26,22 @@ public class MatricesOperations {
     }
 
     public int[][] findDiff(int[][] matrix1, int[][] matrix2){
-        if (matrix1.length != rows || matrix2.length != rows || matrix1[0].length != columns ||
-                matrix2[0].length != columns) {
+
+        int rows1 = matrix1.length;
+        int columns1 = matrix1[0].length;
+        int rows2 = matrix2.length;
+        int columns2 = matrix2[0].length;
+
+
+        if (matrix1.length != rows2 || matrix2.length != rows1 || matrix1[0].length != columns1 ||
+                matrix2[0].length != columns1) {
             throw new IllegalArgumentException("Размеры матриц должны быть равны !");
         }
 
-        int[][] result = new int[rows][columns];
+        int[][] result = new int[rows1][columns2];
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
+        for (int i = 0; i < rows1; i++) {
+            for (int j = 0; j < columns2; j++) {
                 result[i][j] = matrix1[i][j] - matrix2[i][j];
             }
         }
@@ -51,6 +57,10 @@ public class MatricesOperations {
     }
 
     public  int[][] multiplyByNumber(int[][] matrix, int number) {
+
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+
         int[][] result = new int[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -85,6 +95,10 @@ public class MatricesOperations {
     }
 
     public int[][] exponentiateMatrix(int matrix[][],int power){
+
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+
         if (columns != rows){
             throw new IllegalArgumentException("Матрица должна быть квадратной !");
         }
