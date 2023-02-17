@@ -58,5 +58,51 @@ class Matrix {
         return transposedMatrix;
     }
 
+    private int findDeterminant(int[][] matrix) {
+        int determinant = 0;
+        int length = matrix.length;
+
+        if (!isSquareMatrix()) {
+            throw new IllegalArgumentException("Матрица должна быть квадратной !");
+        }
+        if (length == 1) {
+            determinant = matrix[0][0];
+        } else if (length == 2) {
+            determinant = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
+        } else {
+            for (int i = 0; i < length; i++) {
+                int[][] subMatrix = new int[length-1][length-1];
+                for (int j = 1; j < length; j++) {
+                    for (int k = 0; k < length; k++) {
+                        if (k < i) {
+                            subMatrix[j-1][k] = matrix[j][k];
+                        } else if (k > i) {
+                            subMatrix[j-1][k-1] = matrix[j][k];
+                        }
+                    }
+                }
+                determinant += matrix[0][i] * Math.pow(-1, i) * findDeterminant(subMatrix);
+            }
+        }
+        return determinant;
+    }
+
+    public void showDeterminant(int[][] matrix){
+        int determinant = findDeterminant(matrix);
+        System.out.println("Определитель: " + "|" +determinant+"|");
+    }
+
+    private boolean isSquareMatrix() {
+        if (rows != columns) {
+            return false;
+        }
+        for (int i = 0; i < rows; i++) {
+            if (matrix[i].length != columns) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 }
