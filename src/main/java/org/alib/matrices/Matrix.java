@@ -1,5 +1,6 @@
 package org.alib.matrices;
 
+import java.io.IOException;
 import java.util.Scanner;
 class Matrix {
     public int[][] matrix;
@@ -58,39 +59,6 @@ class Matrix {
         return transposedMatrix;
     }
 
-    private int findDeterminant(int[][] matrix) {
-        int determinant = 0;
-        int length = matrix.length;
-
-        if (!isSquareMatrix()) {
-            throw new IllegalArgumentException("Матрица должна быть квадратной !");
-        }
-        if (length == 1) {
-            determinant = matrix[0][0];
-        } else if (length == 2) {
-            determinant = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
-        } else {
-            for (int i = 0; i < length; i++) {
-                int[][] subMatrix = new int[length-1][length-1];
-                for (int j = 1; j < length; j++) {
-                    for (int k = 0; k < length; k++) {
-                        if (k < i) {
-                            subMatrix[j-1][k] = matrix[j][k];
-                        } else if (k > i) {
-                            subMatrix[j-1][k-1] = matrix[j][k];
-                        }
-                    }
-                }
-                determinant += matrix[0][i] * Math.pow(-1, i) * findDeterminant(subMatrix);
-            }
-        }
-        return determinant;
-    }
-
-    public void showDeterminant(int[][] matrix){
-        int determinant = findDeterminant(matrix);
-        System.out.println("Определитель: " + "|" +determinant+"|");
-    }
 
     private boolean isSquareMatrix() {
         if (rows != columns) {
@@ -103,6 +71,93 @@ class Matrix {
         }
 
         return true;
+    }
+
+    public int[][] getCofactors() {
+        int n = matrix.length;
+        int[][] cofactors = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cofactors[i][j] = (int) Math.pow(-1, i + j) * findMinor(i, j);
+            }
+        }
+
+        return cofactors;
+    }
+
+    private int findMinor(int row, int col) {
+        int n = matrix.length;
+        int[][] submatrix = new int[n-1][n-1];
+        int subRow = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (i != row) {
+                int subCol = 0;
+                for (int j = 0; j < n; j++) {
+                    if (j != col) {
+                        submatrix[subRow][subCol] = matrix[i][j];
+                        subCol++;
+                    }
+                }
+                subRow++;
+            }
+        }
+
+        return findDeterminant(submatrix);
+    }
+
+    public void showMinor(int row, int column){
+        int minor = findMinor(row,column);
+        System.out.println("Минор: " +minor);
+    }
+
+    private int findDeterminant(int[][] matrix) {
+        this.matrix = matrix;
+        int n = matrix.length;
+
+
+        if (n == 1) {
+            return matrix[0][0];
+        }
+
+        if (n == 2) {
+            return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
+        }
+
+        int determinant = 0;
+
+        for (int i = 0; i < n; i++) {
+            int sign = (i % 2 == 0) ? 1 : -1;
+            int[][] subMatrix = getSubMatrix(matrix, i);
+            int subDeterminant = findDeterminant(subMatrix);
+            determinant += sign * matrix[0][i] * subDeterminant;
+        }
+
+        return determinant;
+    }
+
+    public void showDeterminant(int[][] matrix){
+        int determinant = findDeterminant(matrix);
+        System.out.println("Определитель: " + "|" +determinant+"|");
+    }
+
+    private int[][] getSubMatrix(int[][] matrix, int col) {
+        int n = matrix.length;
+        int[][] subMatrix = new int[n - 1][n - 1];
+        int subRow = 0;
+
+        for (int i = 1; i < n; i++) {
+            int subCol = 0;
+            for (int j = 0; j < n; j++) {
+                if (j != col) {
+                    subMatrix[subRow][subCol] = matrix[i][j];
+                    subCol++;
+                }
+            }
+            subRow++;
+        }
+        return subMatrix;
     }
 
 }
