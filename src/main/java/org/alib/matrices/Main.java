@@ -12,12 +12,12 @@ public class Main {
         firstMatrix.setMatrix();
         firstMatrix.displayMatrix();
 
-        Matrix secondtMatrix = new Matrix(rows2, columns2);
-        secondtMatrix.setMatrix();
-        secondtMatrix.displayMatrix();
 
+        Matrix secodMatrix = new Matrix(rows2,columns2);
+        firstMatrix.setMatrix();
+        firstMatrix.displayMatrix();
 
-
+        MatricesOperations.multiplyMatrices(firstMatrix.matrix,secodMatrix.matrix);
 
     }
 }

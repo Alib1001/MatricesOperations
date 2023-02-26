@@ -94,36 +94,31 @@ public class MatricesOperations {
         return result;
     }
 
-    public static int[][] exponentiateMatrix(int matrix[][],int power){
+    public static int[][] exponentiateMatrix(int[][] matrix, int power) {
+        int n = matrix.length;
 
-        int rows = matrix.length;
-        int columns = matrix[0].length;
-
-        if (columns != rows){
+        if (n != matrix[0].length) {
             throw new IllegalArgumentException("Матрица должна быть квадратной !");
         }
 
-        int[][] result = new int[rows][columns];
-        for (int i = 0; i < rows; i++) {
+        int[][] result = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
             result[i][i] = 1;
         }
 
-        int[][] temp = new int[rows][columns];
-        for (int p = 0; p < power; p++) {
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < columns; j++) {
-                    temp[i][j] = 0;
-                    for (int k = 0; k < rows; k++) {
-                        temp[i][j] += matrix[i][k] * result[k][j];
-                    }
-                }
+        int[][] temp = new int[n][n];
+        while (power > 0) {
+            if (power % 2 == 1) {
+                temp = multiplyMatrices(result, matrix);
+                result = temp;
             }
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < columns; j++) {
-                    result[i][j] = temp[i][j];
-                }
-            }
+            temp = multiplyMatrices(matrix, matrix);
+            matrix = temp;
+            power /= 2;
         }
+
         return result;
     }
+
 }
