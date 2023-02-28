@@ -2,7 +2,7 @@ package org.alib.matrices;
 
 import java.io.IOException;
 import java.util.Scanner;
-class Matrix {
+public  class Matrix {
     public int[][] matrix;
     private static int  rows;
     private static int columns;
@@ -160,4 +160,9 @@ class Matrix {
         return subMatrix;
     }
 
+    public void setMatrix(int[][] matrix) {
+        this.matrix = matrix;
+        this.rows = matrix.length;
+        this.columns = matrix[0].length;
+    }
 }
